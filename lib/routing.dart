@@ -1,5 +1,7 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tickity/bloc/signup_cubit.dart';
 import 'package:tickity/view/home.dart';
 import 'package:tickity/view/loginpage.dart';
 import 'package:tickity/view/signuppage.dart';
@@ -12,7 +14,7 @@ class Routing {
 
 // GoRouter configuration
   static final router = GoRouter(
-    initialLocation: '/loginPage',
+    initialLocation: '/',
     routes: [
       GoRoute(
         name: 'splash',
@@ -28,20 +30,29 @@ class Routing {
       GoRoute(
         name: 'signupPage',
         path: '/signupPage',
-        builder: (context, state) => const Directionality(
-            textDirection: TextDirection.rtl, child: SignupPage()),
+        builder: (context, state) => Directionality(
+            textDirection: TextDirection.rtl, child: BlocProvider(
+  create: (context) => SignupCubit(),
+  child: const SignupPage(),
+)),
       ),
       GoRoute(
         name: 'signupPage2',
         path: '/signupPage2',
-        builder: (context, state) => const Directionality(
-            textDirection: TextDirection.rtl, child: SignupPage2()),
+        builder: (context, state) => Directionality(
+            textDirection: TextDirection.rtl, child: BlocProvider(
+  create: (context) => SignupCubit(),
+  child: const SignupPage2(),
+)),
       ),
       GoRoute(
         name: 'home',
         path: '/home',
-        builder: (context, state) => const Directionality(
-            textDirection: TextDirection.rtl, child: Home()),
+        builder: (context, state) => Directionality(
+            textDirection: TextDirection.rtl, child: BlocProvider(
+  create: (context) => SignupCubit(),
+  child: const Home(),
+)),
       ),
     ],
   );

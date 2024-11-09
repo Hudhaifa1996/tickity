@@ -2,11 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import '../API/api.dart';
-
 part 'signup_state.dart';
 
 class SignupCubit extends Cubit<SignupState> {
-  SignupCubit() : super(const SignupState());
+  SignupCubit() : super (const SignupState());
   API api = API();
 
   void emailChanged(String email) {
@@ -16,6 +15,7 @@ class SignupCubit extends Cubit<SignupState> {
   void passwordChanged(String password) {
     emit(state.copyWith(password: password, isPasswordEmpty: false));
   }
+
 
   void toggleEmailVisible() {
     emit(state.copyWith(emailVisible: !state.emailVisible));
@@ -49,19 +49,18 @@ class SignupCubit extends Cubit<SignupState> {
     emit(state.copyWith(districtValue: value));
   }
 
-  Future<void> registerRequested() async {
-    emit(state.copyWith(isLoading: true));
-    // Register API
-    await Future.delayed(const Duration(seconds: 2));
-    emit(state.copyWith(isLoading: false));
-  }
+Future<void> registerRequested() async {
+  emit(state.copyWith(isLoading: true));
+  // Register API
+  await Future.delayed(const Duration(seconds: 2));
+  emit(state.copyWith(isLoading: false));
+}
 
   Future<void> googleLoginRequested() async {
     emit(state.copyWith(isLoadingGoogle: true));
     final googleUser = await api.signInWithGoogle();
     if (googleUser != null) {
-      emit(state.copyWith(
-          authAuthenticated: googleUser.displayName ?? "Google User"));
+      emit(state.copyWith(authAuthenticated: googleUser.displayName ?? "Google User"));
     } else {
       emit(state.copyWith(authError: "Google Sign-In Failed"));
     }
@@ -78,4 +77,5 @@ class SignupCubit extends Cubit<SignupState> {
     }
     emit(state.copyWith(isLoadingFacebook: false));
   }
+
 }
