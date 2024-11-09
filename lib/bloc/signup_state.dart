@@ -1,88 +1,87 @@
-class LoginState {
+part of 'signup_cubit.dart';
+
+@immutable
+class SignupState {
   final String email;
   final String password;
   final String? governorateValue;
   final String? districtValue;
   final String name;
-  final String authAuthenticated;
-  final String authError;
-  final bool rememberMe;
   final bool emailVisible;
   final bool passwordVisible;
-  final bool isnullEmail;
-  final bool isnullPassword;
-  final bool isnullName;
+  final bool isEmailEmpty;
+  final bool isPasswordEmpty;
+  final bool isNameEmpty;
   final bool isLoading;
-  final bool isLoadingFaceBook;
-  final bool isLoadingGoogle;
   final List<dynamic> governoratesNames;
   final List<dynamic> districtsNames;
+  final String authAuthenticated;
+  final String authError;
+  final bool isLoadingGoogle;
+  final bool isLoadingFacebook;
 
-
-  LoginState({
+  const SignupState({
     this.email = '',
     this.password = '',
     this.governorateValue,
     this.districtValue,
     this.name = '',
-    this.authAuthenticated = '',
-    this.authError = '',
-    this.rememberMe = false,
     this.emailVisible = false,
     this.passwordVisible = true,
-    this.isnullEmail = true,
-    this.isnullPassword = true,
-    this.isnullName = true,
+    this.isEmailEmpty = true,
+    this.isPasswordEmpty = true,
+    this.isNameEmpty = true,
     this.isLoading = false,
-    this.isLoadingFaceBook = false,
+    this.governoratesNames = const [],
+    this.districtsNames = const [],
+    this.authAuthenticated = '',
+    this.authError = '',
     this.isLoadingGoogle = false,
-    this.governoratesNames = const [] ,
-    this.districtsNames = const [] ,
+    this.isLoadingFacebook = false,
   });
 
   bool get isEmailValid => email.contains(RegExp(r'^[^@]+@[^@]+\.[^@]+'));
 
   bool get isPasswordValid => password.length >= 6;
 
-  LoginState copyWith({
+  SignupState copyWith({
     String? email,
     String? password,
     String? governorateValue,
     String? districtValue,
     String? name,
-    String? authAuthenticated,
-    String? authError,
     bool? rememberMe,
     bool? emailVisible,
     bool? passwordVisible,
-    bool? isnullEmail,
-    bool? isnullPassword,
-    bool? isnullName,
+    bool? isEmailEmpty,
+    bool? isPasswordEmpty,
+    bool? isNameEmpty,
     bool? isLoading,
-    bool? isLoadingFaceBook,
-    bool? isLoadingGoogle,
     List<dynamic>? governoratesNames,
     List<dynamic>? districtsNames,
+    String? authAuthenticated,
+    String? authError,
+    bool? isLoadingGoogle,
+    bool? isLoadingFacebook,
   }) {
-    return LoginState(
+    return SignupState(
       email: email ?? this.email,
       password: password ?? this.password,
       governorateValue: governorateValue ?? this.governorateValue,
       districtValue: districtValue ?? this.districtValue,
       name: name ?? this.name,
-      authAuthenticated: authAuthenticated ?? this.authAuthenticated,
-      authError: authError ?? this.authError,
-      rememberMe: rememberMe ?? this.rememberMe,
       emailVisible: emailVisible ?? this.emailVisible,
       passwordVisible: passwordVisible ?? this.passwordVisible,
-      isnullEmail: isnullEmail ?? this.isnullEmail,
-      isnullPassword: isnullPassword ?? this.isnullPassword,
-      isnullName: isnullName ?? this.isnullName,
+      isEmailEmpty: isEmailEmpty ?? this.isEmailEmpty,
+      isPasswordEmpty: isPasswordEmpty ?? this.isPasswordEmpty,
+      isNameEmpty: isNameEmpty ?? this.isNameEmpty,
       isLoading: isLoading ?? this.isLoading,
-      isLoadingFaceBook: isLoadingFaceBook ?? this.isLoadingFaceBook,
-      isLoadingGoogle: isLoadingGoogle ?? this.isLoadingGoogle,
       governoratesNames: governoratesNames ?? this.governoratesNames,
       districtsNames: districtsNames ?? this.districtsNames,
+      authAuthenticated: authAuthenticated ?? this.authAuthenticated,
+      authError: authError ?? this.authError,
+      isLoadingGoogle: isLoadingGoogle ?? this.isLoadingGoogle,
+      isLoadingFacebook: isLoadingFacebook ?? this.isLoadingFacebook,
     );
   }
 }
