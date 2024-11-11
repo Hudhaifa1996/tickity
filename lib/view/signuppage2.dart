@@ -35,12 +35,15 @@ class SignupPage2 extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: BlocBuilder<SignupCubit, SignupState>(
             builder: (context, state) {
-              state.governoratesNames.isEmpty ? context.read<SignupCubit>().governoratesRequested() : null;
-              state.districtsNames.isEmpty ? context.read<SignupCubit>().districtsRequested() : null;
+              state.governoratesNames.isEmpty
+                  ? context.read<SignupCubit>().governoratesRequested()
+                  : null;
+              state.districtsNames.isEmpty
+                  ? context.read<SignupCubit>().districtsRequested()
+                  : null;
               return Column(
                 children: [
-                  SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.12),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.12),
                   const Text(
                     "انشاء حساب جديد",
                     textAlign: TextAlign.center,
@@ -51,8 +54,7 @@ class SignupPage2 extends StatelessWidget {
                         fontFamily: "Ping AR + LT",
                         color: Color(0xff151D29)),
                   ),
-                  SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.012),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.012),
                   const Text(
                     "رجاءاً قم بملأ المعلومات المطلوبة لتسجيل حسابك",
                     textAlign: TextAlign.center,
@@ -63,8 +65,7 @@ class SignupPage2 extends StatelessWidget {
                         fontFamily: "Ping AR + LT",
                         color: Color(0xff667185)),
                   ),
-                  SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.02),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                   ListTile(
                     title: const Text(
                       "الاسم الثلاثي",
@@ -198,8 +199,7 @@ class SignupPage2 extends StatelessWidget {
                               .read<SignupCubit>()
                               .governoratesSelected(newValue!);
                         },
-                        icon:
-                            const Icon(Icons.keyboard_arrow_down, size: 20),
+                        icon: const Icon(Icons.keyboard_arrow_down, size: 20),
                         isExpanded: true,
                       )),
                   ListTile(
@@ -273,12 +273,10 @@ class SignupPage2 extends StatelessWidget {
                               .read<SignupCubit>()
                               .districtsSelected(newValue!);
                         },
-                        icon:
-                            const Icon(Icons.keyboard_arrow_down, size: 20),
+                        icon: const Icon(Icons.keyboard_arrow_down, size: 20),
                         isExpanded: true,
                       )),
-                  SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.04),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.04),
                   ListTile(
                     subtitle: ElevatedButton(
                       style: ElevatedButton.styleFrom(
@@ -296,9 +294,7 @@ class SignupPage2 extends StatelessWidget {
                               state.name.isEmpty
                           ? null
                           : () {
-                              context
-                                  .read<SignupCubit>()
-                                  .registerRequested();
+                              context.read<SignupCubit>().registerRequested();
                               context.go("/home");
                             },
                       child: state.isLoading

@@ -237,9 +237,7 @@ class SignupPage extends StatelessWidget {
                             color: const Color(0xff667185),
                           ),
                           onPressed: () {
-                            context
-                                .read<SignupCubit>()
-                                .togglePasswordVisible();
+                            context.read<SignupCubit>().togglePasswordVisible();
                           },
                         ),
                       ),

@@ -249,9 +249,7 @@ class LoginPage extends StatelessWidget {
                             color: const Color(0xff667185),
                           ),
                           onPressed: () {
-                            context
-                                .read<LoginCubit>()
-                                .togglePasswordVisible();
+                            context.read<LoginCubit>().togglePasswordVisible();
                           },
                         ),
                       ),
@@ -278,9 +276,7 @@ class LoginPage extends StatelessWidget {
                                 inactiveToggleColor: Colors.white,
                                 value: state.rememberMe,
                                 onToggle: (_) {
-                                  context
-                                      .read<LoginCubit>()
-                                      .toggleRememberMe();
+                                  context.read<LoginCubit>().toggleRememberMe();
                                 },
                               ),
                             ),
