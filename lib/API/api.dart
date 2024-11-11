@@ -9,10 +9,10 @@ class API {
   final dio = Dio();
   final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
 
-  Future<Response> governorates() async {
+  Future<List> governorates() async {
     Response response = await dio
         .get("https://api.tickity.test-alphaber-iq.cloud/api/governorate");
-    return response;
+    return response.data;
   }
 
   Future<GoogleSignInAccount?> signInWithGoogle() async {

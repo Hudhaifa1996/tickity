@@ -9,21 +9,18 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => LoginCubit(),
-      child: Scaffold(
-        body: FutureBuilder(
-            future: Future.delayed(const Duration(milliseconds: 2)),
-            initialData: 'wait',
-            builder: (context, AsyncSnapshot<dynamic> snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  context.go('/loginPage');
-                });
-              }
-              return const Center(child: CircularProgressIndicator());
-            }),
-      ),
+    return Scaffold(
+      body: FutureBuilder(
+          future: Future.delayed(const Duration(milliseconds: 2)),
+          initialData: 'wait',
+          builder: (context, AsyncSnapshot<dynamic> snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                context.go('/loginPage');
+              });
+            }
+            return const Center(child: CircularProgressIndicator());
+          }),
     );
   }
 }

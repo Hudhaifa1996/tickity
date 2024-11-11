@@ -9,6 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:tickity/view/signuppage2.dart';
 import 'package:tickity/view/splash.dart';
 
+import 'bloc/login_cubit.dart';
+
+SignupCubit _signupCubit = SignupCubit();
+
 class Routing {
   static late final SharedPreferences prefs;
 
@@ -24,36 +28,51 @@ class Routing {
       GoRoute(
         name: 'loginPage',
         path: '/loginPage',
-        builder: (context, state) => const Directionality(
-            textDirection: TextDirection.rtl, child: LoginPage()),
+        builder: (context, state) => Directionality(
+          textDirection: TextDirection.rtl,
+          child: BlocProvider(
+            create: (context) => LoginCubit(),
+            child: const LoginPage(),
+          ),
+        ),
       ),
       GoRoute(
         name: 'signupPage',
         path: '/signupPage',
         builder: (context, state) => Directionality(
-            textDirection: TextDirection.rtl, child: BlocProvider(
-  create: (context) => SignupCubit(),
-  child: const SignupPage(),
-)),
+            textDirection: TextDirection.rtl,
+            child: BlocProvider.value(
+              value: _signupCubit,
+              child: const SignupPage(),
+            )),
       ),
       GoRoute(
         name: 'signupPage2',
         path: '/signupPage2',
         builder: (context, state) => Directionality(
-            textDirection: TextDirection.rtl, child: BlocProvider(
-  create: (context) => SignupCubit(),
-  child: const SignupPage2(),
-)),
+            textDirection: TextDirection.rtl,
+            child: BlocProvider.value(
+              value: _signupCubit,
+              child: const SignupPage2(),
+            )),
       ),
       GoRoute(
         name: 'home',
         path: '/home',
         builder: (context, state) => Directionality(
-            textDirection: TextDirection.rtl, child: BlocProvider(
-  create: (context) => SignupCubit(),
-  child: const Home(),
-)),
+            textDirection: TextDirection.rtl,
+            child: BlocProvider.value(
+              value: _signupCubit,
+              child: const Home(),
+            )),
       ),
     ],
+    redirect: (context, state) {
+      if (!['/home', '/signupPage', '/signupPage2']
+          .contains(state.uri.toString())) {
+        _signupCubit = SignupCubit();
+      }
+      return null;
+    },
   );
 }

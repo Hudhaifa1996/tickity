@@ -34,14 +34,12 @@ class SignupCubit extends Cubit<SignupState> {
   }
 
   Future<void> governoratesRequested() async {
-    Response response = await api.governorates();
-    List<dynamic> responseData = response.data;
+    List<dynamic> responseData = await api.governorates();
     emit(state.copyWith(governoratesNames: responseData));
   }
 
   Future<void> districtsRequested() async {
-    Response response = await api.governorates();
-    List<dynamic> responseData = response.data;
+    List<dynamic> responseData = await api.governorates();
     emit(state.copyWith(districtsNames: responseData));
   }
 

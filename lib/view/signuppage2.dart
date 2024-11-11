@@ -35,8 +35,8 @@ class SignupPage2 extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: BlocBuilder<SignupCubit, SignupState>(
             builder: (context, state) {
-              context.read<SignupCubit>().governoratesRequested();
-              context.read<SignupCubit>().districtsRequested();
+              state.governoratesNames.isEmpty ? context.read<SignupCubit>().governoratesRequested() : null;
+              state.districtsNames.isEmpty ? context.read<SignupCubit>().districtsRequested() : null;
               return Column(
                 children: [
                   SizedBox(
