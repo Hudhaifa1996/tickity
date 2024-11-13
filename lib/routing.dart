@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tickity/bloc/home_cubit.dart';
 import 'package:tickity/bloc/signup_cubit.dart';
 import 'package:tickity/view/home.dart';
 import 'package:tickity/view/loginpage.dart';
@@ -8,7 +9,6 @@ import 'package:tickity/view/signuppage.dart';
 import 'package:flutter/material.dart';
 import 'package:tickity/view/signuppage2.dart';
 import 'package:tickity/view/splash.dart';
-
 import 'bloc/login_cubit.dart';
 
 SignupCubit _signupCubit = SignupCubit();
@@ -18,7 +18,7 @@ class Routing {
 
 // GoRouter configuration
   static final router = GoRouter(
-    initialLocation: '/',
+    initialLocation: '/home',
     routes: [
       GoRoute(
         name: 'splash',
@@ -61,15 +61,14 @@ class Routing {
         path: '/home',
         builder: (context, state) => Directionality(
             textDirection: TextDirection.rtl,
-            child: BlocProvider.value(
-              value: _signupCubit,
+            child: BlocProvider(
+              create: (context) => HomeCubit(),
               child: const Home(),
             )),
       ),
     ],
     redirect: (context, state) {
-      if (!['/home', '/signupPage', '/signupPage2']
-          .contains(state.uri.toString())) {
+      if (['/signupPage'].contains(state.uri.toString())) {
         _signupCubit = SignupCubit();
       }
       return null;
