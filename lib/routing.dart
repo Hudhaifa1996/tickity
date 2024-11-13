@@ -9,6 +9,8 @@ import 'package:tickity/view/signuppage.dart';
 import 'package:flutter/material.dart';
 import 'package:tickity/view/signuppage2.dart';
 import 'package:tickity/view/splash.dart';
+import 'bloc/home_cubits/category_cubit.dart';
+import 'bloc/home_cubits/collection_cubit.dart';
 import 'bloc/login_cubit.dart';
 
 SignupCubit _signupCubit = SignupCubit();
@@ -61,8 +63,15 @@ class Routing {
         path: '/home',
         builder: (context, state) => Directionality(
             textDirection: TextDirection.rtl,
-            child: BlocProvider(
-              create: (context) => HomeCubit(),
+            child: MultiBlocProvider(
+  providers: [
+  BlocProvider(
+  create: (context) => CollectionCubit(),
+  ),
+  BlocProvider(
+  create: (context) => CategoryCubit(),
+  ),
+              ],
               child: const Home(),
             )),
       ),

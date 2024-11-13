@@ -9,6 +9,17 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class API {
   final dio = Dio();
+
+  Future<Response> getData({required String URL, Map<String,dynamic>? queryParameters}) async {
+    Response response = await dio.get(URL,
+        queryParameters: queryParameters
+    );
+    return response;
+  }
+
+
+
+
   final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
 
   Future<List> governorates() async {
@@ -17,12 +28,7 @@ class API {
     return response.data;
   }
 
-  Future<Response> getData({required String URL, Map<String,dynamic>? queryParameters}) async {
-Response response = await dio.get(URL,
-    queryParameters: queryParameters
-);
- return response;
-  }
+
 
   Future<List<dynamic>> collection() async {
     Response response = await dio.get(
