@@ -1,150 +1,110 @@
 class EventResponse {
-  List<Data>? data;
-  int? pageNumber;
-  int? pageSize;
-  int? totalCount;
+  EventResponse({
+    required this.data,
+    required this.pageNumber,
+    required this.pageSize,
+    required this.totalCount,
+  });
 
-  EventResponse({this.data, this.pageNumber, this.pageSize, this.totalCount});
+  final List<Datum> data;
+  final int? pageNumber;
+  final int? pageSize;
+  final int? totalCount;
 
-  EventResponse.fromJson(Map<String, dynamic> json) {
-    if (json['data'] != null) {
-      data = <Data>[];
-      json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
-      });
-    }
-    pageNumber = json['pageNumber'];
-    pageSize = json['pageSize'];
-    totalCount = json['totalCount'];
+  factory EventResponse.fromJson(Map<String, dynamic> json){
+    return EventResponse(
+      data: json["data"] == null ? [] : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
+      pageNumber: json["pageNumber"],
+      pageSize: json["pageSize"],
+      totalCount: json["totalCount"],
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
-    }
-    data['pageNumber'] = this.pageNumber;
-    data['pageSize'] = this.pageSize;
-    data['totalCount'] = this.totalCount;
-    return data;
-  }
 }
 
-class Data {
-  String? id;
-  String? title;
-  String? startDate;
-  String? bookingStartDate;
-  bool? isDisabled;
-  List<Images>? images;
-  List<TicketTypes>? ticketTypes;
+class Datum {
+  Datum({
+    required this.id,
+    required this.title,
+    required this.startDate,
+    required this.bookingStartDate,
+    required this.isDisabled,
+    required this.images,
+    required this.ticketTypes,
+  });
 
-  Data(
-      {this.id,
-        this.title,
-        this.startDate,
-        this.bookingStartDate,
-        this.isDisabled,
-        this.images,
-        this.ticketTypes});
+  final String? id;
+  final String? title;
+  final DateTime? startDate;
+  final DateTime? bookingStartDate;
+  final bool? isDisabled;
+  final List<Image> images;
+  final List<TicketType> ticketTypes;
 
-  Data.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    title = json['title'];
-    startDate = json['startDate'];
-    bookingStartDate = json['bookingStartDate'];
-    isDisabled = json['isDisabled'];
-    if (json['images'] != null) {
-      images = <Images>[];
-      json['images'].forEach((v) {
-        images!.add(new Images.fromJson(v));
-      });
-    }
-    if (json['ticketTypes'] != null) {
-      ticketTypes = <TicketTypes>[];
-      json['ticketTypes'].forEach((v) {
-        ticketTypes!.add(new TicketTypes.fromJson(v));
-      });
-    }
+  factory Datum.fromJson(Map<String, dynamic> json){
+    return Datum(
+      id: json["id"],
+      title: json["title"],
+      startDate: DateTime.tryParse(json["startDate"] ?? ""),
+      bookingStartDate: DateTime.tryParse(json["bookingStartDate"] ?? ""),
+      isDisabled: json["isDisabled"],
+      images: json["images"] == null ? [] : List<Image>.from(json["images"]!.map((x) => Image.fromJson(x))),
+      ticketTypes: json["ticketTypes"] == null ? [] : List<TicketType>.from(json["ticketTypes"]!.map((x) => TicketType.fromJson(x))),
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['title'] = this.title;
-    data['startDate'] = this.startDate;
-    data['bookingStartDate'] = this.bookingStartDate;
-    data['isDisabled'] = this.isDisabled;
-    if (this.images != null) {
-      data['images'] = this.images!.map((v) => v.toJson()).toList();
-    }
-    if (this.ticketTypes != null) {
-      data['ticketTypes'] = this.ticketTypes!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
 }
 
-class Images {
-  String? imageUrl;
-  int? eventImageType;
+class Image {
+  Image({
+    required this.imageUrl,
+    required this.eventImageType,
+  });
 
-  Images({this.imageUrl, this.eventImageType});
+  final String? imageUrl;
+  final int? eventImageType;
 
-  Images.fromJson(Map<String, dynamic> json) {
-    imageUrl = json['imageUrl'];
-    eventImageType = json['eventImageType'];
+  factory Image.fromJson(Map<String, dynamic> json){
+    return Image(
+      imageUrl: json["imageUrl"],
+      eventImageType: json["eventImageType"],
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['imageUrl'] = this.imageUrl;
-    data['eventImageType'] = this.eventImageType;
-    return data;
-  }
 }
 
-class TicketTypes {
-  String? id;
-  String? title;
-  String? imageUrl;
-  int? price;
-  int? ticketsCount;
-  int? availableTicketsCount;
-  String? eventId;
-  bool? isDisabled;
+class TicketType {
+  TicketType({
+    required this.id,
+    required this.title,
+    required this.imageUrl,
+    required this.price,
+    required this.ticketsCount,
+    required this.availableTicketsCount,
+    required this.eventId,
+    required this.isDisabled,
+  });
 
-  TicketTypes(
-      {this.id,
-        this.title,
-        this.imageUrl,
-        this.price,
-        this.ticketsCount,
-        this.availableTicketsCount,
-        this.eventId,
-        this.isDisabled});
+  final String? id;
+  final String? title;
+  final String? imageUrl;
+  final double? price;
+  final int? ticketsCount;
+  final int? availableTicketsCount;
+  final String? eventId;
+  final bool? isDisabled;
 
-  TicketTypes.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    title = json['title'];
-    imageUrl = json['imageUrl'];
-    price = json['price'];
-    ticketsCount = json['ticketsCount'];
-    availableTicketsCount = json['availableTicketsCount'];
-    eventId = json['eventId'];
-    isDisabled = json['isDisabled'];
+  factory TicketType.fromJson(Map<String, dynamic> json){
+    return TicketType(
+      id: json["id"],
+      title: json["title"],
+      imageUrl: json["imageUrl"],
+      price: json["price"],
+      ticketsCount: json["ticketsCount"],
+      availableTicketsCount: json["availableTicketsCount"],
+      eventId: json["eventId"],
+      isDisabled: json["isDisabled"],
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['title'] = this.title;
-    data['imageUrl'] = this.imageUrl;
-    data['price'] = this.price;
-    data['ticketsCount'] = this.ticketsCount;
-    data['availableTicketsCount'] = this.availableTicketsCount;
-    data['eventId'] = this.eventId;
-    data['isDisabled'] = this.isDisabled;
-    return data;
-  }
 }

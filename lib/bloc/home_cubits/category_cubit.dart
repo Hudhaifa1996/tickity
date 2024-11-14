@@ -10,7 +10,7 @@ part 'category_state.dart';
 class CategoryCubit extends Cubit<CategoryState> {
   CategoryCubit() : super(CategoryLoading());
   API api = API();
-  List<Categories>? categories;
+  List<Category>? categories;
 
   Future<void> categoryRequested() async {
     emit(CategoryLoading());

@@ -36,6 +36,7 @@ dependencies:
   dio:
   flutter_switch:
   google_sign_in:
+  flutter_svg:
 #  flutter_facebook_auth:
 #  firebase_auth:
 #  path_provider:

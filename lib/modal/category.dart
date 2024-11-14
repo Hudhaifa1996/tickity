@@ -1,74 +1,56 @@
 class CategoryResponse {
-  List<Categories>? categories;
-  String? status;
+  CategoryResponse({
+    required this.categories,
+    required this.status,
+  });
 
-  CategoryResponse({this.categories, this.status});
+  final List<Category> categories;
+  final String? status;
 
-  CategoryResponse.fromJson(Map<String, dynamic> json) {
-    if (json['categories'] != null) {
-      categories = <Categories>[];
-      json['categories'].forEach((v) {
-        categories!.add(new Categories.fromJson(v));
-      });
-    }
-    status = json['status'];
+  factory CategoryResponse.fromJson(Map<String, dynamic> json){
+    return CategoryResponse(
+      categories: json["categories"] == null ? [] : List<Category>.from(json["categories"]!.map((x) => Category.fromJson(x))),
+      status: json["status"],
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.categories != null) {
-      data['categories'] = this.categories!.map((v) => v.toJson()).toList();
-    }
-    data['status'] = this.status;
-    return data;
-  }
 }
 
-class Categories {
-  int? order;
-  String? name;
-  String? color;
-  String? iconUrl;
-  Null? events;
-  String? id;
-  bool? isDeleted;
-  String? createAt;
-  String? updateAt;
+class Category {
+  Category({
+    required this.order,
+    required this.name,
+    required this.color,
+    required this.iconUrl,
+    required this.events,
+    required this.id,
+    required this.isDeleted,
+    required this.createAt,
+    required this.updateAt,
+  });
 
-  Categories(
-      {this.order,
-        this.name,
-        this.color,
-        this.iconUrl,
-        this.events,
-        this.id,
-        this.isDeleted,
-        this.createAt,
-        this.updateAt});
+  final int? order;
+  final String? name;
+  final String? color;
+  final String? iconUrl;
+  final dynamic events;
+  final String? id;
+  final bool? isDeleted;
+  final DateTime? createAt;
+  final DateTime? updateAt;
 
-  Categories.fromJson(Map<String, dynamic> json) {
-    order = json['order'];
-    name = json['name'];
-    color = json['color'];
-    iconUrl = json['iconUrl'];
-    events = json['events'];
-    id = json['id'];
-    isDeleted = json['isDeleted'];
-    createAt = json['createAt'];
-    updateAt = json['updateAt'];
+  factory Category.fromJson(Map<String, dynamic> json){
+    return Category(
+      order: json["order"],
+      name: json["name"],
+      color: json["color"],
+      iconUrl: json["iconUrl"],
+      events: json["events"],
+      id: json["id"],
+      isDeleted: json["isDeleted"],
+      createAt: DateTime.tryParse(json["createAt"] ?? ""),
+      updateAt: DateTime.tryParse(json["updateAt"] ?? ""),
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['order'] = this.order;
-    data['name'] = this.name;
-    data['color'] = this.color;
-    data['iconUrl'] = this.iconUrl;
-    data['events'] = this.events;
-    data['id'] = this.id;
-    data['isDeleted'] = this.isDeleted;
-    data['createAt'] = this.createAt;
-    data['updateAt'] = this.updateAt;
-    return data;
-  }
 }

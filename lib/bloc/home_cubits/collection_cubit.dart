@@ -11,7 +11,7 @@ part 'collection_state.dart';
 class CollectionCubit extends Cubit<CollectionState> {
   CollectionCubit() : super(CollectionLoading());
   API api = API();
-  List<Collections>? collections;
+  List<Collection>? collections;
 
   Future<void> collectionRequested() async {
     emit(CollectionLoading());

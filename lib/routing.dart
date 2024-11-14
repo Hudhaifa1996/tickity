@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tickity/bloc/home_cubit.dart';
+import 'package:tickity/bloc/home_cubits/event_cubit.dart';
 import 'package:tickity/bloc/signup_cubit.dart';
 import 'package:tickity/view/home.dart';
 import 'package:tickity/view/loginpage.dart';
@@ -71,6 +71,9 @@ class Routing {
   BlocProvider(
   create: (context) => CategoryCubit(),
   ),
+    BlocProvider(
+      create: (context) => EventCubit(),
+    ),
               ],
               child: const Home(),
             )),
