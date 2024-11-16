@@ -9,14 +9,17 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class API {
   final dio = Dio();
-  Future<Response> getData({required String URL, Map<String,dynamic>? queryParameters}) async {
-    Response response = await dio.get(URL,
-        queryParameters: queryParameters);
+  Future<Response> getData(
+      {required String URL, Map<String, dynamic>? queryParameters}) async {
+    late Response response;
+    try {
+      response = await dio.get(URL, queryParameters: queryParameters);
+    } on DioException catch (e) {
+      response = e.response!;
+    }
+
     return response;
   }
-
-
-
 
   final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
 
@@ -25,8 +28,6 @@ class API {
         .get("https://api.tickity.test-alphaber-iq.cloud/api/governorate");
     return response.data;
   }
-
-
 
   // Future<List<dynamic>> collection() async {
   //   Response response = await dio.get(

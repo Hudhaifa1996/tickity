@@ -18,10 +18,12 @@ class EventCubit extends Cubit<EventState> {
 
   Future<void> eventRequested() async {
     pageNumber == 1 ? emit(EventLoading()) : null;
-    Response response = await api.getData(URL: constants.getEventsURL, queryParameters: {"PageNumber": pageNumber, "PageSize": 10});
-    newEvents = EventResponse.fromJson(response.data);
-
+    Response response = await api.getData(
+        URL: constants.getEventsURL,
+        queryParameters: {"PageNumber": pageNumber, "PageSize": 10});
+    print("4");
     if (response.statusCode == 200) {
+      newEvents = EventResponse.fromJson(response.data);
       if (events == null) {
         events = newEvents;
       } else if (events!.pageNumber != newEvents!.pageNumber) {
@@ -36,7 +38,9 @@ class EventCubit extends Cubit<EventState> {
   void setupScrollListener() {
     isStarted = true;
     scrollController.addListener(() {
-      if (scrollController.position.pixels == scrollController.position.maxScrollExtent && events!.data.length < events!.totalCount!) {
+      if (scrollController.position.pixels ==
+              scrollController.position.maxScrollExtent &&
+          events!.data.length < events!.totalCount!) {
         pageNumber++;
         eventRequested();
       }
