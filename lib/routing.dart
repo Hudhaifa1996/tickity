@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tickity/bloc/home_cubits/event_cubit.dart';
 import 'package:tickity/bloc/signup_cubit.dart';
+import 'package:tickity/view/allevents.dart';
 import 'package:tickity/view/home.dart';
 import 'package:tickity/view/loginpage.dart';
 import 'package:tickity/view/signuppage.dart';
@@ -14,6 +15,7 @@ import 'bloc/home_cubits/collection_cubit.dart';
 import 'bloc/login_cubit.dart';
 
 SignupCubit _signupCubit = SignupCubit();
+EventCubit _eventCubit = EventCubit();
 
 class Routing {
   static late final SharedPreferences prefs;
@@ -64,18 +66,28 @@ class Routing {
         builder: (context, state) => Directionality(
             textDirection: TextDirection.rtl,
             child: MultiBlocProvider(
-  providers: [
-  BlocProvider(
-  create: (context) => CollectionCubit(),
-  ),
-  BlocProvider(
-  create: (context) => CategoryCubit(),
-  ),
-    BlocProvider(
-      create: (context) => EventCubit(),
-    ),
+              providers: [
+                BlocProvider(
+                  create: (context) => CollectionCubit(),
+                ),
+                BlocProvider(
+                  create: (context) => CategoryCubit(),
+                ),
+                BlocProvider.value(
+                  value: _eventCubit,
+                ),
               ],
               child: const Home(),
+            )),
+      ),
+      GoRoute(
+        name: 'allEvents',
+        path: '/allEvents',
+        builder: (context, state) => Directionality(
+            textDirection: TextDirection.rtl,
+            child: BlocProvider.value(
+              value: _eventCubit,
+              child: const AllEvents(),
             )),
       ),
     ],

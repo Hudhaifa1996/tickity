@@ -37,6 +37,7 @@ dependencies:
   flutter_switch:
   google_sign_in:
   flutter_svg:
+  intl:
 #  flutter_facebook_auth:
 #  firebase_auth:
 #  path_provider:
