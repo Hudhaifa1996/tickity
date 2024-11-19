@@ -3,4 +3,4 @@ const getCollectionsURL =
 const getCategoriesURL =
     "https://api.tickity.test-alphaber-iq.cloud/api/customer/categories";
 const getEventsURL =
-    "https://api.tickity.test-alphaber-iq.cloud/api/customer/faisal";
+    "https://api.tickity.test-alphaber-iq.cloud/api/customer/events";

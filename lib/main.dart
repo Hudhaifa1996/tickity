@@ -3,10 +3,13 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tickity/routing.dart';
 
+import 'di_container.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final SharedPreferences prefs = await SharedPreferences.getInstance();
-  Routing.prefs = prefs;
+  setupLocator();
+  // final SharedPreferences prefs = await SharedPreferences.getInstance();
+  // Routing.prefs = prefs;
   await initializeDateFormatting('ar_SA', null);
   runApp(
     MaterialApp.router(

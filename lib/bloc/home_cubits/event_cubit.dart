@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../API/api.dart';
 import 'package:tickity/constants.dart' as constants;
+import '../../di_container.dart';
 import '../../modal/event.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +10,7 @@ part 'event_state.dart';
 
 class EventCubit extends Cubit<EventState> {
   EventCubit() : super(EventLoading());
-  API api = API();
+  API api = locator<API>();
   EventResponse? events;
   EventResponse? newEvents;
   ScrollController scrollController = ScrollController();
@@ -21,7 +22,6 @@ class EventCubit extends Cubit<EventState> {
     Response response = await api.getData(
         URL: constants.getEventsURL,
         queryParameters: {"PageNumber": pageNumber, "PageSize": 10});
-    print("4");
     if (response.statusCode == 200) {
       newEvents = EventResponse.fromJson(response.data);
       if (events == null) {

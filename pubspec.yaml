@@ -38,6 +38,7 @@ dependencies:
   google_sign_in:
   flutter_svg:
   intl:
+  get_it:
 #  flutter_facebook_auth:
 #  firebase_auth:
 #  path_provider:
@@ -102,4 +103,5 @@ flutter:
   assets:
     - lib/bloc/
     - lib/assets/
+
 

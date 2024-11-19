@@ -4,13 +4,14 @@ import 'package:tickity/constants.dart' as constants;
 import 'package:flutter/material.dart';
 
 import '../../API/api.dart';
+import '../../di_container.dart';
 import '../../modal/collection.dart';
 
 part 'collection_state.dart';
 
 class CollectionCubit extends Cubit<CollectionState> {
   CollectionCubit() : super(CollectionLoading());
-  API api = API();
+  API api = locator<API>();
   List<Collection>? collections;
 
   Future<void> collectionRequested() async {

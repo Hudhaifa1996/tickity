@@ -13,12 +13,13 @@ import 'package:tickity/view/splash.dart';
 import 'bloc/home_cubits/category_cubit.dart';
 import 'bloc/home_cubits/collection_cubit.dart';
 import 'bloc/login_cubit.dart';
+import 'di_container.dart';
 
-SignupCubit _signupCubit = SignupCubit();
-EventCubit _eventCubit = EventCubit();
+SignupCubit _signupCubit = locator<SignupCubit>();
+EventCubit _eventCubit =  locator<EventCubit>();
 
 class Routing {
-  static late final SharedPreferences prefs;
+  // static late final SharedPreferences prefs;
 
 // GoRouter configuration
   static final router = GoRouter(

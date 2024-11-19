@@ -1,14 +1,10 @@
 import 'package:dio/dio.dart';
-
-// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-// import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-// import com.facebook.FacebookSdk;
-// import com.facebook.appevents.AppEventsLogger;
+import '../di_container.dart';
 
 class API {
-  final dio = Dio();
+  Dio dio = locator<Dio>();
   Future<Response> getData(
       {required String URL, Map<String, dynamic>? queryParameters}) async {
     late Response response;

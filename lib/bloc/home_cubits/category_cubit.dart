@@ -5,11 +5,13 @@ import 'package:tickity/modal/category.dart';
 import '../../API/api.dart';
 import 'package:tickity/constants.dart' as constants;
 
+import '../../di_container.dart';
+
 part 'category_state.dart';
 
 class CategoryCubit extends Cubit<CategoryState> {
   CategoryCubit() : super(CategoryLoading());
-  API api = API();
+  API api = locator<API>();
   List<Category>? categories;
 
   Future<void> categoryRequested() async {
