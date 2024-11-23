@@ -1,12 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import '../API/api.dart';
+import '../di_container.dart';
 
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(const LoginState());
-  API api = API();
+  API api = locator<API>();
 
   void emailChanged(String email) {
     emit(state.copyWith(email: email, isEmailEmpty: false));
